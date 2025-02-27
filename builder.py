@@ -11,6 +11,18 @@ resume_data = {
     "education": []
 }
 
+photo_url = input("Enter the URL to your profile photo (optional, press Enter to skip): ").strip()
+if photo_url:
+    resume_data["photo_url"] = photo_url
+
+linkedin = input("Enter your LinkedIn profile URL (optional, press Enter to skip): ").strip()
+if linkedin:
+    resume_data["linkedin"] = linkedin
+
+location = input("Enter your location (optional, press Enter to skip): ").strip()
+if location:
+    resume_data["location"] = location
+
 print("\nAdd your professional experience:")
 print("(Press Enter without input to finish adding experiences)")
 
