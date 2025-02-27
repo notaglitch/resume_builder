@@ -170,13 +170,15 @@
 
     <div class="section">
         <p class="title">Education</p>
-        <div class="experience-item">
-            <div class="company-header">
-                <span class="company-name"><strong>{{ education.school }}</strong></span>
-                <span class="years">{{ education.years }}</span>
+        {% for edu in education %}
+            <div class="experience-item">
+                <div class="company-header">
+                    <span class="company-name"><strong>{{ edu.school }}</strong></span>
+                    <span class="years">{{ edu.years }}</span>
+                </div>
+                <p class="role">{{ edu.degree }}</p>
             </div>
-            <p class="role">{{ education.degree }}</p>
-        </div>
+        {% endfor %}
     </div>
 </body>
 </html>
