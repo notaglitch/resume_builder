@@ -3,23 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume</title>
+    <title>{{ name }} - Resume</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .header { text-align: center; }
-        .section { margin-bottom: 15px; }
-        .title { font-size: 20px; font-weight: bold; border-bottom: 2px solid black; padding-bottom: 5px; }
-        ul { list-style-type: none; padding: 0; }
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --text-color: #333;
+            --light-text: #666;
+            --bg-light: #f7f9fc;
+        }
+        
+        body { 
+            font-family: 'Helvetica', Arial, sans-serif;
+            margin: 40px auto;
+            max-width: 850px;
+            line-height: 1.6;
+            color: var(--text-color);
+            padding: 0 20px;
+            background-color: #fff;
+        }
+
+        @media print {
+            body {
+                margin: 0;
+                padding: 15px;
+            }
+        }
+
+        .header { 
+            text-align: center;
+            margin-bottom: 35px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--accent-color);
+        }
+
+        .header h1 {
+            margin-bottom: 12px;
+            color: var(--primary-color);
+            font-size: 32px;
+        }
+
+        .contact-info {
+            color: var(--light-text);
+            font-size: 16px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .section { 
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+
+        .title { 
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        ul { 
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        ul li {
+            background: var(--bg-light);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 15px;
+            transition: background-color 0.2s;
+        }
+
+        ul li:hover {
+            background-color: #e8f0fe;
+        }
+
+        .experience-item {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: var(--bg-light);
+        }
+
+        .company-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 8px;
+        }
+
+        .company-name {
+            color: var(--primary-color);
+            font-size: 19px;
+        }
+
+        .years {
+            color: var(--light-text);
+            font-size: 15px;
+        }
+
+        .role {
+            color: var(--accent-color);
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                margin: 20px auto;
+            }
+            
+            .section {
+                padding: 0 10px;
+            }
+
+            .company-header {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>{{ name }}</h1>
-        <p>{{ email }} | {{ phone }}</p>
+        <div class="contact-info">
+            <span>📧 {{ email }}</span>
+            <span>📱 {{ phone }}</span>
+        </div>
     </div>
 
     <div class="section">
-        <p class="title">Summary</p>
+        <p class="title">About Me</p>
         <p>{{ summary }}</p>
     </div>
 
@@ -27,7 +150,7 @@
         <p class="title">Skills</p>
         <ul>
             {% for skill in skills %}
-                <li>- {{ skill }}</li>
+                <li>{{ skill.strip() }}</li>
             {% endfor %}
         </ul>
     </div>
@@ -35,15 +158,25 @@
     <div class="section">
         <p class="title">Experience</p>
         {% for job in experience %}
-            <p><strong>{{ job.company }}</strong> ({{ job.years }})</p>
-            <p>{{ job.role }}</p>
+            <div class="experience-item">
+                <div class="company-header">
+                    <span class="company-name"><strong>{{ job.company }}</strong></span>
+                    <span class="years">{{ job.years }}</span>
+                </div>
+                <p class="role">{{ job.role }}</p>
+            </div>
         {% endfor %}
     </div>
 
     <div class="section">
         <p class="title">Education</p>
-        <p><strong>{{ education.school }}</strong> ({{ education.years }})</p>
-        <p>{{ education.degree }}</p>
+        <div class="experience-item">
+            <div class="company-header">
+                <span class="company-name"><strong>{{ education.school }}</strong></span>
+                <span class="years">{{ education.years }}</span>
+            </div>
+            <p class="role">{{ education.degree }}</p>
+        </div>
     </div>
 </body>
 </html>
