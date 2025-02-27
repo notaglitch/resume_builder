@@ -7,26 +7,41 @@ resume_data = {
     "phone": input("Enter your phone number: "),
     "summary": input("Enter your summary: "),
     "skills": input("Enter your skills(separated by commas): ").split(","),
-    "experience": []
+    "experience": [],
+    "education": []
 }
 
+print("\nAdd your professional experience:")
+print("(Press Enter without input to finish adding experiences)")
+
 while True:
-    choice = input("Do you want to add professional experience? (y/n): ").lower()
-    if choice != 'y':
+    company = input("\nEnter company name (or press Enter to finish): ").strip()
+    if not company:
         break
-    
+        
     experience = {
-        "company": input("Enter company name: "),
+        "company": company,
         "role": input("Enter role/position: "),
         "years": input("Enter years (e.g. 2019-2021): ")
     }
     resume_data["experience"].append(experience)
+    print("Experience added successfully!")
 
-resume_data["education"] = {
-    "school": input("Enter school name: "),
-    "degree": input("Enter degree/certification: "),
-    "years": input("Enter years (e.g. 2015-2019): ")
-}
+print("\nAdd your education:")
+print("(Press Enter without input to finish adding education)")
+
+while True:
+    school = input("\nEnter school name (or press Enter to finish): ").strip()
+    if not school:
+        break
+        
+    education = {
+        "school": school,
+        "degree": input("Enter degree/certification: "),
+        "years": input("Enter years (e.g. 2015-2019): ")
+    }
+    resume_data["education"].append(education)
+    print("Education added successfully!")
 
 env = Environment(loader=FileSystemLoader("."))
 template = env.get_template("template.html")
@@ -36,4 +51,4 @@ html_out = template.render(resume_data)
 output_pdf = f"{resume_data['name']}_resume.pdf"
 HTML(string=html_out).write_pdf(output_pdf)
 
-print(f"Resume generated successfully: {output_pdf}")
+print(f"\nResume generated successfully: {output_pdf}")
