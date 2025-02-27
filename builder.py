@@ -10,9 +10,8 @@ resume_data = {
     "experience": []
 }
 
-# Handle experience entries
 while True:
-    choice = input("Do you want to add work experience? (y/n): ").lower()
+    choice = input("Do you want to add professional experience? (y/n): ").lower()
     if choice != 'y':
         break
     
@@ -23,7 +22,6 @@ while True:
     }
     resume_data["experience"].append(experience)
 
-# Add education
 resume_data["education"] = {
     "school": input("Enter school name: "),
     "degree": input("Enter degree/certification: "),
