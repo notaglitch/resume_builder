@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .header { text-align: center; }
+        .section { margin-bottom: 15px; }
+        .title { font-size: 20px; font-weight: bold; border-bottom: 2px solid black; padding-bottom: 5px; }
+        ul { list-style-type: none; padding: 0; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ name }}</h1>
+        <p>{{ email }} | {{ phone }}</p>
+    </div>
+
+    <div class="section">
+        <p class="title">Summary</p>
+        <p>{{ summary }}</p>
+    </div>
+
+    <div class="section">
+        <p class="title">Skills</p>
+        <ul>
+            {% for skill in skills %}
+                <li>- {{ skill }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <p class="title">Experience</p>
+        {% for job in experience %}
+            <p><strong>{{ job.company }}</strong> ({{ job.years }})</p>
+            <p>{{ job.role }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="section">
+        <p class="title">Education</p>
+        <p><strong>{{ education.school }}</strong> ({{ education.years }})</p>
+        <p>{{ education.degree }}</p>
+    </div>
+</body>
+</html>
