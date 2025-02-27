@@ -6,19 +6,28 @@ resume_data = {
     "email": input("Enter your email: "),
     "phone": input("Enter your phone number: "),
     "summary": input("Enter your summary: "),
-    "skills": input("Enter your skills(seperated by commas): ").split(","),
-    "experience": [
-        choice = input("Do you have any experience? (y/n): ")
-        if choice == "y":
-            {"company": input("Enter your company: "), "role": input("Enter your role: "), "years": input("Enter your years: ")}
-        else:
-            []
-    ],
-    "education": {
-        "school": input("Enter your school: "),
-        "degree": input("Enter your degree: "),
-        "years": input("Enter your years: ")
+    "skills": input("Enter your skills(separated by commas): ").split(","),
+    "experience": []
+}
+
+# Handle experience entries
+while True:
+    choice = input("Do you want to add work experience? (y/n): ").lower()
+    if choice != 'y':
+        break
+    
+    experience = {
+        "company": input("Enter company name: "),
+        "role": input("Enter role/position: "),
+        "years": input("Enter years (e.g. 2019-2021): ")
     }
+    resume_data["experience"].append(experience)
+
+# Add education
+resume_data["education"] = {
+    "school": input("Enter school name: "),
+    "degree": input("Enter degree/certification: "),
+    "years": input("Enter years (e.g. 2015-2019): ")
 }
 
 env = Environment(loader=FileSystemLoader("."))
