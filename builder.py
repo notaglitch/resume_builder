@@ -10,7 +10,6 @@ resume_data = {
     "experience": [],
     "education": []
 }
-
 photo_url = input("Enter the URL to your profile photo (optional, press Enter to skip): ").strip()
 if photo_url:
     resume_data["photo_url"] = photo_url
