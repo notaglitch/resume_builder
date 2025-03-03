@@ -5,5 +5,4 @@ const Templates = () => {
     </div>
   )
 }
-
 export default Templates
