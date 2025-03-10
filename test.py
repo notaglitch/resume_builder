@@ -1,17 +1,6 @@
-from mailmerge import MailMerge
+import subprocess
 
-def generate_docx(data):
-    template = "resume_template.docx"
-    doc = MailMerge(template)
-
-    doc.merge(
-        Name=data["name"],
-        JobTitle=data["job_title"],
-        Email=data["email"],
-        Experience1=data["experience"][0] if len(data["experience"]) > 0 else "",
-        Experience2=data["experience"][1] if len(data["experience"]) > 1 else "",
-    )
-
-    output_filename = "generated_resume.docx"
-    doc.write(output_filename)
-    return output_filename
+def convert_to_pdf(docx_filename):
+    pdf_filename = docx_filename.replace(".docx", ".pdf")
+    subprocess.run(["unoconv", "-f", "pdf", docx_filename])
+    return pdf_filename
